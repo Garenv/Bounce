@@ -11,8 +11,8 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        let c = document.getElementById("mycanvas");
-        let cxt = c.getContext("2d");
+        let c = document.getElementById("myCanvas");
+        let ctx = c.getContext("2d");
         let x = 5;
         let y = 8;
         let r = 10;
@@ -26,16 +26,16 @@ class Main extends Component {
         };
 
         function init() {
-            window.requestAnimationFrame(init, cxt);
+            // window.requestAnimationFrame(init, ctx);
             draw();
         }
 
         function drawCircle(x, y, r) {
-            cxt.clearRect(0, 0, 240, 240);
-            cxt.beginPath();
-            cxt.arc(x, y, r, 0, Math.PI * 2, false);
-            cxt.fillStyle = "#006699";
-            cxt.fill();
+            ctx.clearRect(0, 0, 240, 240);
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2, false);
+            ctx.fillStyle = "#006699";
+            ctx.fill();
         }
 
         function draw() {
@@ -53,13 +53,24 @@ class Main extends Component {
             x += dx;
             y += dy;
         }
+
         init();
+
+        let c2 = document.getElementById("myCanvasTwo");
+        let ctx2 = c2.getContext("2d");
+
+        ctx2.beginPath();
+        ctx2.arc(100, 75, 50, 0, 2 * Math.PI);
+        ctx2.stroke();
+
+
     }
 
     render() {
         return(
             <div>
-                <canvas id="mycanvas" width="240" height="240"/>
+                <canvas id="myCanvas" width="240" height="240"/>
+                <canvas id="myCanvasTwo" width="300" height="300"/>
                 <h1>{this.state.count}</h1>
             </div>
         );
@@ -68,20 +79,3 @@ class Main extends Component {
 
 export default Main;
 
-// let promise = new Promise((resolve, reject ) => {
-//     let name = "Garen";
-//
-//     if(name === "Garen") {
-//         resolve("Promise resolved!!!");
-//     } else {
-//         reject(Error("Promise rejected"));
-//     }
-// });
-//
-// let obj = { newName: '' };
-//
-// promise.then(res => {
-//     this.setState({name: res});
-// }, function (error) {
-//     this.setState({name: error});
-// });
